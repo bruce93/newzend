@@ -23,7 +23,7 @@ class ProductForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Название_продукта',
+                'label' => 'Название продукта',
             ),
         ));
         $this->add(array(

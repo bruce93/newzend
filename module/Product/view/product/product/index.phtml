@@ -11,18 +11,18 @@ $this->headTitle($title);
 
 <table class="table">
 <tr>
-    <th>Product_name</th>
-    <th>Description</th>
-    <th>Price</th>
-    <th>Image</th>
+    <th>Название товара</th>
+    <th>Описание</th>
+    <th>Цена</th>
+    <th>Изображение</th>
     <th>&nbsp;</th>
 </tr>
-<?php foreach ($albums as $product) : ?>
+<?php foreach ($products as $product) : ?>
 <tr>
-    <td><?php echo $this->escapeHtml($product->title);?></td>
-    <td><?php echo $this->escapeHtml($product->artist);?></td>
-    <td><?php echo $this->escapeHtml($product->artist);?></td>
-    <td><?php echo $this->escapeHtml($product->artist);?></td>
+    <td><?php echo $this->escapeHtml($product->product_name);?></td>
+    <td><?php echo $this->escapeHtml($product->description);?></td>
+    <td><?php echo $this->escapeHtml($product->price);?></td>
+    <td><?php echo $this->escapeHtml($product->image);?></td>
     <td>
         <a href="<?php echo $this->url('product',
             array('action'=>'edit', 'id' => $product->id));?>">Edit</a>

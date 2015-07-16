@@ -32,7 +32,7 @@ class ProductController extends AbstractActionController
                 $product->exchangeArray($form->getData());
                 $this->getProductTable()->saveProduct($product);
 
-                // Redirect to list of albums
+                // Redirect to list of products
                 return $this->redirect()->toRoute('product');
             }
         }
@@ -61,7 +61,7 @@ class ProductController extends AbstractActionController
             if ($form->isValid()) {
                 $this->getProductTable()->saveProduct($form->getData());
 
-                // Redirect to list of albums
+                // Redirect to list of products
                 return $this->redirect()->toRoute('product');
             }
         }
@@ -88,7 +88,7 @@ class ProductController extends AbstractActionController
                 $this->getProductTable()->deleteProduct($id);
             }
 
-            // Redirect to list of albums
+            // Redirect to list of products
             return $this->redirect()->toRoute('product');
         }
 
