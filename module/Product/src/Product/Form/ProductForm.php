@@ -23,7 +23,7 @@ class ProductForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Название продукта',
+                'label' => 'Название ',
             ),
         ));
         $this->add(array(
@@ -32,7 +32,7 @@ class ProductForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Описание',
+                'label' => '_Описание ',
             ),
         ));
         $this->add(array(
@@ -41,7 +41,7 @@ class ProductForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Цена',
+                'label' => '_Цена ',
             ),
         ));
         $this->add(array(
@@ -50,9 +50,17 @@ class ProductForm extends Form
                 'type'  => 'text',
             ),
             'options' => array(
-                'label' => 'Изображение',
+                'label' => '_Изображение ',
             ),
         ));
+        /*$this->add(array(
+            'name' => 'open_image',
+            'attributes' => array(
+                'type'  => 'file',
+                'value' => 'Open',
+                'id' => 'openbutton',
+            ),
+        ));*/
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(

@@ -22,7 +22,7 @@ $this->headTitle($title);
     <td><?php echo $this->escapeHtml($product->product_name);?></td>
     <td><?php echo $this->escapeHtml($product->description);?></td>
     <td><?php echo $this->escapeHtml($product->price);?></td>
-    <td><?php echo $this->escapeHtml($product->image);?></td>
+    <td><?php echo "<img src='/img/" . $this->escapeHtml($product->image) . "' />";?></td>
     <td>
         <a href="<?php echo $this->url('product',
             array('action'=>'edit', 'id' => $product->id));?>">Edit</a>
