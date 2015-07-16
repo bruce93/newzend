@@ -1,2 +1,2 @@
-// module/Product/autoload_classmap.php:
+<?php
 return array();

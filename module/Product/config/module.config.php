@@ -1,12 +1,11 @@
-// module/Product/config/module.config.php:
+<?php
 return array(
-    'controlleturn arrayrs' => array(
+    'controllers' => array(
         'invokables' => array(
             'Product\Controller\Product' => 'Product\Controller\ProductController',
         ),
     ),
-
- // The following section is new and should be added to your file
+    // The following section is new and should be added to your file
     'router' => array(
         'routes' => array(
             'product' => array(
@@ -25,11 +24,9 @@ return array(
             ),
         ),
     ),
-
     'view_manager' => array(
         'template_path_stack' => array(
             'product' => __DIR__ . '/../view',
         ),
     ),
 );
- 

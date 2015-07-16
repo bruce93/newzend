@@ -17,7 +17,7 @@ return array(
 	'DoctrineORMModule',
 	'ZfcUserDoctrineORM',
 	'Album',
-	//'Product',
+	'Product',
     ),
 
     // These are various options for the listeners attached to the ModuleManager
