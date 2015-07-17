@@ -1,12 +1,15 @@
+<div style="float:left; padding-right:16px;"><?php echo $this->gravatar($this->zfcUserIdentity()->getEmail()) ?></div>
+<h3><?php echo $this->translate('Hello'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
+<a href="<?php echo $this->url('zfcuser/logout') ?>">[<?php echo $this->translate('Sign Out'); ?>]</a>
+<div style="clear:both;"></div>
 <?php
 // module/Product/view/product/product/index.phtml:
+
 $title = 'My products';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
-<p>
-    <a href="#">Login</a> | <a href="#">Register</a>
-</p>
+
 <p>
     <a href="<?php echo $this->url('product', array('action'=>'add'));?>">Add new product</a>
 </p>
