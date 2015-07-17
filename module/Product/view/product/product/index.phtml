@@ -1,12 +1,11 @@
 <?php
 // module/Product/view/product/product/index.phtml:
-
 $title = 'My products';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 <p>
-    <a href="#">Login |</a><a href="#"> Register</a>
+    <a href="#">Login</a> | <a href="#">Register</a>
 </p>
 <p>
     <a href="<?php echo $this->url('product', array('action'=>'add'));?>">Add new product</a>
@@ -25,7 +24,7 @@ $this->headTitle($title);
     <td><?php echo $this->escapeHtml($product->product_name);?></td>
     <td><?php echo $this->escapeHtml($product->description);?></td>
     <td><?php echo $this->escapeHtml($product->price);?></td>
-    <td><?php echo "<img src='/img/" . $this->escapeHtml($product->image) . "' />";?></td>
+    <td><?php echo "<img src='/img/" . $this->escapeHtml($product->image) . "'/>";?></td>
     <td>
         <a href="<?php echo $this->url('product',
             array('action'=>'edit', 'id' => $product->id));?>">Edit</a>
