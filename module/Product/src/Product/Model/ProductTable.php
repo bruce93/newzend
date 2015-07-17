@@ -1,24 +1,19 @@
 <?php
 // module/Product/src/Product/Model/ProductTable.php:
 namespace Product\Model;
-
 use Zend\Db\TableGateway\TableGateway;
-
 class ProductTable
 {
     protected $tableGateway;
-
     public function __construct(TableGateway $tableGateway)
     {
         $this->tableGateway = $tableGateway;
     }
-
     public function fetchAll()
     {
         $resultSet = $this->tableGateway->select();
         return $resultSet;
     }
-
     public function getProduct($id)
     {
         $id  = (int) $id;
@@ -29,7 +24,6 @@ class ProductTable
         }
         return $row;
     }
-
     public function saveProduct(Product $product)
     {
         $data = array(
@@ -38,7 +32,6 @@ class ProductTable
             'price' => $product->price,
             'image'  => $product->image,
         );
-
         $id = (int)$product->id;
         if ($id == 0) {
             $this->tableGateway->insert($data);
@@ -50,7 +43,6 @@ class ProductTable
             }
         }
     }
-
     public function deleteProduct($id)
     {
         $this->tableGateway->delete(array('id' => $id));

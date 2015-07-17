@@ -1,9 +1,7 @@
 <?php
 // module/Product/src/Product/Form/ProductForm.php:
 namespace Product\Form;
-
 use Zend\Form\Form;
-
 class ProductForm extends Form
 {
     public function __construct($name = null)
@@ -47,20 +45,12 @@ class ProductForm extends Form
         $this->add(array(
             'name' => 'image',
             'attributes' => array(
-                'type'  => 'text',
+                'type'  => 'file',
             ),
             'options' => array(
                 'label' => '_Изображение ',
             ),
         ));
-        /*$this->add(array(
-            'name' => 'open_image',
-            'attributes' => array(
-                'type'  => 'file',
-                'value' => 'Open',
-                'id' => 'openbutton',
-            ),
-        ));*/
         $this->add(array(
             'name' => 'submit',
             'attributes' => array(

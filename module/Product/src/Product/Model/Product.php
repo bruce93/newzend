@@ -1,12 +1,10 @@
 <?php
 // module/Product/src/Product/Model/Product.php:
 namespace Product\Model;
-
 use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
-
 class Product implements InputFilterAwareInterface
 {
     public $id;
@@ -15,7 +13,6 @@ class Product implements InputFilterAwareInterface
     public $price;
     public $image;
     protected $inputFilter;
-
     public function exchangeArray($data)
     {
         $this->id     = (isset($data['id']))     ? $data['id']     : null;
@@ -24,24 +21,20 @@ class Product implements InputFilterAwareInterface
         $this->price  = (isset($data['price']))  ? $data['price']  : null;
         $this->image  = (isset($data['image']))  ? $data['image']  : null;
     }
-
      // Add the following method:
     public function getArrayCopy()
     {
         return get_object_vars($this);
     }
-
     public function setInputFilter(InputFilterInterface $inputFilter)
     {
         throw new \Exception("Not used");
     }
-
     public function getInputFilter()
     {
         if (!$this->inputFilter) {
             $inputFilter = new InputFilter();
             $factory     = new InputFactory();
-
             $inputFilter->add($factory->createInput(array(
                 'name'     => 'id',
                 'required' => true,
@@ -49,7 +42,6 @@ class Product implements InputFilterAwareInterface
                     array('name' => 'Int'),
                 ),
             )));
-
             $inputFilter->add($factory->createInput(array(
                 'name'     => 'product_name',
                 'required' => true,
@@ -68,7 +60,6 @@ class Product implements InputFilterAwareInterface
                     ),
                 ),
             )));
-
             $inputFilter->add($factory->createInput(array(
                 'name'     => 'description',
                 'required' => true,
@@ -87,7 +78,6 @@ class Product implements InputFilterAwareInterface
                     ),
                 ),
             )));
-
             $inputFilter->add($factory->createInput(array(
                 'name'     => 'price',
                 'required' => true,
@@ -106,7 +96,6 @@ class Product implements InputFilterAwareInterface
                     ),
                 ),
             )));
-
             $inputFilter->add($factory->createInput(array(
                 'name'     => 'image',
                 'required' => true,
@@ -125,10 +114,8 @@ class Product implements InputFilterAwareInterface
                     ),
                 ),
             )));
-
             $this->inputFilter = $inputFilter;
         }
-
         return $this->inputFilter;
     }
 }
