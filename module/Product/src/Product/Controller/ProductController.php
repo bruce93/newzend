@@ -11,6 +11,7 @@ class ProductController extends AbstractActionController
     {
         return new ViewModel(array(
             'products' => $this->getProductTable()->fetchAll(),
+            'user_login_widget_view_template' => 'zfc-user/user/login.phtml',
         ));
     }
     public function addAction()
@@ -86,5 +87,15 @@ class ProductController extends AbstractActionController
             $this->productTable = $sm->get('Product\Model\ProductTable');
         }
         return $this->productTable;
+    }
+    public function logoutAction()
+    {
+        $this->zfcUserAuthentication()->getAuthAdapter()->resetAdapters();
+        //$this->zfcUserAuthentication()->getAuthAdapter()->logoutAdapters();
+        $this->zfcUserAuthentication()->getAuthService()->clearIdentity();
+
+        $redirect = $this->redirectCallback;
+
+        return $redirect();
     }
 }
