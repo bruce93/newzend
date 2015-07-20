@@ -88,14 +88,4 @@ class ProductController extends AbstractActionController
         }
         return $this->productTable;
     }
-    public function logoutAction()
-    {
-        $this->zfcUserAuthentication()->getAuthAdapter()->resetAdapters();
-        //$this->zfcUserAuthentication()->getAuthAdapter()->logoutAdapters();
-        $this->zfcUserAuthentication()->getAuthService()->clearIdentity();
-
-        $redirect = $this->redirectCallback;
-
-        return $redirect();
-    }
 }
