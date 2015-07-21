@@ -9,6 +9,7 @@ return array(
     'router' => array(
         'routes' => array(
             'product' => array(
+                'zfcuser' => __DIR__ . '/vendor/zf-commons/zfc-user/view/zfc-user/user',
                 'type'    => 'segment',
                 'options' => array(
                     'route'    => '/product[/:action][/:id]',

@@ -1,4 +1,5 @@
-<?php if($this->zfcUserIdentity() != NULL) { ?>
+
+<?php if($this->zfcUserIdentity()) { ?>
     <h3><?php echo $this->translate('Hello'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
     <a href="<?php echo $this->url('zfcuser/logout') ?>">[<?php echo $this->translate('Sign Out'); ?>]</a>
     <div style="clear:both;"></div>
@@ -9,14 +10,16 @@
 <?php } ?>
 <?php
 // module/Product/view/product/product/index.phtml:
+
 $title = 'My products';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
-
-<p>
-    <a href="<?php echo $this->url('product', array('action'=>'add'));?>">Add new product</a>
-</p>
+<?php if ($this->zfcUserIdentity()) { ?>  
+	<p>
+	    <a href="<?php echo $this->url('product', array('action'=>'add'));?>">Add new product</a>
+	</p>
+<?php } ?>
 
 <table class="table">
 <tr>
@@ -33,10 +36,12 @@ $this->headTitle($title);
     <td><?php echo $this->escapeHtml($product->price);?></td>
     <td><?php echo "<img src='/img/" . $this->escapeHtml($product->image) . "'/>";?></td>
     <td>
-        <a href="<?php echo $this->url('product',
-            array('action'=>'edit', 'id' => $product->id));?>">Edit</a>
-        <a href="<?php echo $this->url('product',
-            array('action'=>'delete', 'id' => $product->id));?>">Delete</a>
+        <?php if ($this->zfcUserIdentity()) { ?> 
+	        <a href="<?php echo $this->url('product',
+	            array('action'=>'edit', 'id' => $product->id));?>">Edit</a>
+	        <a href="<?php echo $this->url('product',
+	            array('action'=>'delete', 'id' => $product->id));?>">Delete</a>
+        <?php } ?>
     </td>
 </tr>
 <?php endforeach; ?>
