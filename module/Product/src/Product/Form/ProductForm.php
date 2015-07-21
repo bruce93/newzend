@@ -9,6 +9,7 @@ class ProductForm extends Form
         // we want to ignore the name passed
         parent::__construct('product');
         $this->setAttribute('method', 'post');
+        //$this->setAttribute('enctype', 'multipart/form-data');
         $this->add(array(
             'name' => 'id',
             'attributes' => array(

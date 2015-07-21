@@ -1,12 +1,19 @@
+<?php if($this->zfcUserIdentity() != NULL) { ?>
+    <h3><?php echo $this->translate('Hello'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
+    <a href="<?php echo $this->url('zfcuser/logout') ?>">[<?php echo $this->translate('Sign Out'); ?>]</a>
+    <div style="clear:both;"></div>
+<?php } else { ?>
+<p>
+    <a href="http://newzend/user/login">Sign In</a> | <a href="http://newzend/user/register">Sign Up</a>
+</p>
+<?php } ?>
 <?php
 // module/Product/view/product/product/index.phtml:
 $title = 'My products';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
-<p>
-    <a href="#">Login</a> | <a href="#">Register</a>
-</p>
+
 <p>
     <a href="<?php echo $this->url('product', array('action'=>'add'));?>">Add new product</a>
 </p>
