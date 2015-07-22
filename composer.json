@@ -16,6 +16,7 @@
         "doctrine/doctrine-module": "0.*",
         "doctrine/doctrine-orm-module": "^0.9.1",
         "zf-commons/zfc-user-doctrine-orm": "^1.0",
-        "bjyoungblood/bjy-authorize": "1.4.*"
+        "bjyoungblood/bjy-authorize": "1.4.*",
+        "cgm/zf2-file-upload-examples": "1.0.*"
     }
 }

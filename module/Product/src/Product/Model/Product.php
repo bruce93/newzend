@@ -5,6 +5,8 @@ use Zend\InputFilter\Factory as InputFactory;
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
+use Zend\Validator\File\IsImage;
+use Zend\Form;
 class Product implements InputFilterAwareInterface
 {
     public $id;
@@ -99,26 +101,12 @@ class Product implements InputFilterAwareInterface
             $inputFilter->add($factory->createInput(array(
                 'name'     => 'image',
                 'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-                    array(
-                        'name'    => 'StringLength',
-                        'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min'      => 1,
-                            'max'      => 100,
-                        ),
-                    ),
-                ),
             )));
             $this->inputFilter = $inputFilter;
         }
         return $this->inputFilter;
     }
-    public function __invoke(User $user = null)
+    /*public function __invoke(User $user = null)
     {
         if (null === $user) {
             if ($this->getAuthService()->hasIdentity()) {
@@ -145,5 +133,5 @@ class Product implements InputFilterAwareInterface
         }
 
         return $displayName;
-    }
+    }*/
 }

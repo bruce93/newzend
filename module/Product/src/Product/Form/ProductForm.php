@@ -2,6 +2,8 @@
 // module/Product/src/Product/Form/ProductForm.php:
 namespace Product\Form;
 use Zend\Form\Form;
+use Zend\InputFilter;
+use Zend\Form\Element;
 class ProductForm extends Form
 {
     public function __construct($name = null)
@@ -10,6 +12,7 @@ class ProductForm extends Form
         parent::__construct('product');
         $this->setAttribute('method', 'post');
         //$this->setAttribute('enctype', 'multipart/form-data');
+        $this->setAttribute('onsubmit', 'return SendFile()' );
         $this->add(array(
             'name' => 'id',
             'attributes' => array(
@@ -47,6 +50,8 @@ class ProductForm extends Form
             'name' => 'image',
             'attributes' => array(
                 'type'  => 'file',
+                'id' => 'photo',
+                //'multiple' => 'true',
             ),
             'options' => array(
                 'label' => '_Изображение ',
@@ -54,6 +59,8 @@ class ProductForm extends Form
         ));
         $this->add(array(
             'name' => 'submit',
+            //'target' => './public/img/',
+            //'use_upload_name' => true,
             'attributes' => array(
                 'type'  => 'submit',
                 'value' => 'Go',

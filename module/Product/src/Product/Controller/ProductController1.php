@@ -10,6 +10,7 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\FileInput;
 use Zend\Validator;
+use Zend\Validator\File\Size;
 
 class ProductController extends AbstractActionController
 {
@@ -24,46 +25,114 @@ class ProductController extends AbstractActionController
     }
     public function addAction()
     {
-        $form = new ProductForm();
+
+    	$form = new ProductForm();
         $request = $this->getRequest();
-        if ($request->isPost()) {   
-            $product = new Product();
-            $form->setInputFilter($product->getInputFilter());
-            $form->setData($request->getPost());
-            if ($form->isValid()) {
+        if ($request->isPost()) {
+         $product = new Product();
+         $form->setInputFilter($product->getInputFilter());
+         $form->setData($request->getPost());
+         if ($form->isValid()) {
+                $product->exchangeArray($form->getData());
+                //$this->getProductTable()->saveProduct($product);
                 $adapter = new \Zend\File\Transfer\Adapter\Http();
+                $dir = getcwd() . '/public/img/';
+                $data = $form->getData();
+                $filename = $data['image'];
+                $fileTlsName = $dir.$filename;// pashet
+
+                //$adapter->addValidator('Extension', false, 'jpg,png,gif');
+                var_dump($adapter); die;
+                //var_dump($fileTlsName);die;
+                //$adapter->addFilter('Rename', $fileTlsName);// rename file
+                
+            if ($adapter->receive($filename)) {// upload file
+                return $this->redirect()->toRoute('product');
+            }
+        }
+    }
+    return array('form' => $form);
+}
+           // $data = $form->getData();
+           // $filename = $data['image'];
+           // $dir = 'public/img';
+           // $product->setDestination( getcwd() . '/public/img/'); 
+          /*  var_dump(getcwd() . '/public/img/');       
+            if ($form->isValid()) {  
+             $adapter = new \Zend\File\Transfer\Adapter\Http();*/
+// }
+// }
+        /*$adapter->setValidators();
+        if (!$adapter->isValid()){
+
+            $dataError = $adapter->getMessages();
+            foreach($dataError as $key => $row)
+            {
+                $errorMessage[] = $row;
+            }
+            return false;
+        } else {
+            $fileTlsName = $dir.$fileName;// \gid\uid\fileName
+            $adapter->addFilter('Rename', $fileTlsName);// rename file
+            if ($adapter->receive($fileName)) {// upload file
+                return true;
+            }
+        }
+        return false;*/
+    //}
+
+        //$form->get('submit')->setValue('Add');
+       // $request = $this->getRequest();
+       // if ($request->isPost()) {   
+           /* $product = new Product();
+            $file = 'public/img';
+            $product->setDestination(PUBLIC_PATH . '/img'); 
+           var_dump($product); die;
+            $form->setInputFilter($product->getInputFilter());*/
+           /* $form->setData($request->getPost());
+            
+            if ($form->isValid()) {
+                
+
+                $adapter = new \Zend\File\Transfer\Adapter\Http();
+                $adapter->setValidators(array($size),$fileName);
+
+                var_dump($adapter); die;
+                //validator can be more than one...
+                //var_dump('1'); die;
                 if (!$adapter->isValid()){
+                	//var_dump(getMessages()); die;
                     $dataError = $adapter->getMessages();
                     foreach($dataError as $key => $row)
                     {
                         $errorMessage[] = $row;
-                    } 
-                    //print_r($row);
-                   // return false;
-                } else { 
+                    }
+                    return false;
+                } else {
                     $data = $form->getData();
+                    var_dump('1'); die;
                     $fileName = $data['image'];
-                    //$dir = getcwd() . '/public/img/';
-                    $dir = 'var/www/newzend/public/img/';
+                    $dir = 'puplic/img';
                     $fileTlsName = $dir.$fileName;// \gid\uid\fileName
                     $adapter->addFilter('Rename', $fileTlsName);// rename file
-                       if ($adapter->receive($fileName)) {// upload file
-                            return true;
-                        }
+                    if ($adapter->receive($fileName)) {// upload file
+                        return true;
+                    }
                 }
-                //return false;
+        //return false;
+
+                //var_dump($form->getData()); die; 
                 $product->exchangeArray($form->getData());
-                //var_dump($product); die;
+                $this->getProductTable()->saveProduct($product);
+                //$product->setDestination($image);
                 //$product->receive();
-                $this->getProductTable()->saveProduct($product); 
                 // Redirect to list of products
                 return $this->redirect()->toRoute('product');
-            } else {//написать сообщения и вывести во view
-                echo 'error';
+            } else {//взять сообщения и вывести во view 
             }
         }
-        return array('form' => $form);
-    }
+        return array('form' => $form);*/
+    //}
     public function editAction()
     {
         $id = (int) $this->params()->fromRoute('id', 0);
@@ -142,4 +211,16 @@ class ProductController extends AbstractActionController
 
         return array('form' => $form);
     }
+    /* protected function getFsConfig()
+    {
+        if (!$this->_fsConfig) {
+            $sm = $this->getServiceLocator();
+            //var_dump($sm);die;
+            $config = $sm->get('Config');
+            //var_dump($config);die;
+            $this->_fsConfig = $config['filesystem']['file'];
+            var_dump($file);die;
+        }
+        return $this->_fsConfig;
+    }*/
 }
