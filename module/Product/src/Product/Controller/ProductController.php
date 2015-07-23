@@ -35,11 +35,10 @@ class ProductController extends AbstractActionController
             if ($form->isValid()) {
                 $fileName = $form->getData()['image']['name'];
                 if (move_uploaded_file($form->getData()['image']['tmp_name'], getcwd() . '/public/img/' . $fileName)) {
-				    echo "Файл корректен и был успешно загружен.\n";
-				} else {
-				    echo "Возможная атака с помощью файловой загрузки!\n";
-				}
-
+                    echo "Файл корректен и был успешно загружен.\n";
+                } else {
+                    echo "Возможная атака с помощью файловой загрузки!\n";
+                }
                 $product->exchangeArray($form->getData());
                 $this->getProductTable()->saveProduct($product); 
                 // Redirect to list of products
@@ -64,16 +63,17 @@ class ProductController extends AbstractActionController
         if ($request->isPost()) {
             $form->setInputFilter($product->getInputFilter());
             $form->setData(array_merge($request->getPost()->toArray(), $request->getFiles()->toArray()));
+            var_dump($form->setData(array_merge($request->getPost()->toArray(), $request->getFiles()->toArray())));die;
+            //var_dump($form);die;
             if ($form->isValid()) {
-				$fileName = $form->getData()['image']['name'];
-				var_dump($fileName = $form->getData()['image']['name']); die;
+            	$fileName = $form->getData()['image']['name'];
                 if (move_uploaded_file($form->getData()['image']['tmp_name'], getcwd() . '/public/img/' . $fileName)) {
 				    echo "Файл корректен и был успешно загружен.\n";
 				} else {
 				    echo "Возможная атака с помощью файловой загрузки!\n";
 				}
 
-            	$product->exchangeArray($form->getData());
+                $product->exchangeArray($form->getData());
                 $this->getProductTable()->saveProduct($form->getData());
                 // Redirect to list of products
                 return $this->redirect()->toRoute('product');

@@ -50,7 +50,7 @@ class ProductForm extends Form
             'name' => 'image',
             'attributes' => array(
                 'type'  => 'file',
-                'id' => 'photo',
+                //'id' => 'photo',
             ),
             'options' => array(
                 'label' => '_Изображение ',
