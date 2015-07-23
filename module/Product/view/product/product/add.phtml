@@ -7,12 +7,9 @@ $this->headTitle($title);
 <?php
 $form = $this->form;
 $form->setAttribute('action', $this->url('product', array('action' => 'add')));
-//$form->setAttribute('enctype', 'multipart/form-data');
 $form->prepare();
 echo $this->form()->openTag($form);
 echo $this->formCollection($form);
-//echo $this->formRow($form->get('image'));
-//echo $this->formSubmit($form->get('submit'));
 echo $this->form()->closeTag();
 
 

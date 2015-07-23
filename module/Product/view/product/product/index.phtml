@@ -1,5 +1,6 @@
 
-<?php if($this->zfcUserIdentity()) { ?>
+<?php 
+if($this->zfcUserIdentity()) { ?>
     <h3><?php echo $this->translate('Hello'); ?>, <?php echo $this->zfcUserDisplayName() ?>!</h3>
     <a href="<?php echo $this->url('zfcuser/logout') ?>">[<?php echo $this->translate('Sign Out'); ?>]</a>
     <div style="clear:both;"></div>

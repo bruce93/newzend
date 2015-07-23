@@ -25,6 +25,7 @@ class ProductController extends AbstractActionController
     }
     public function addAction()
     {
+        if ($this->zfcUserAuthentication()->hasIdentity() && $this->zfcUserAuthentication()->getIdentity()->getRole() == "admin") {
         $form = new ProductForm();
         $request = $this->getRequest();
         if ($request->isPost()) {   
@@ -46,9 +47,18 @@ class ProductController extends AbstractActionController
             }
         }
         return array('form' => $form);
+        } else {
+            
+            $view = new ViewModel(array(
+                'message' => 'GET OUT OF HERE!',
+            ));
+            $view->setTemplate('product/error/access');
+            return $view;
+        }
     }
     public function editAction()
     {
+        if ($this->zfcUserAuthentication()->hasIdentity() && $this->zfcUserAuthentication()->getIdentity()->getRole() == "admin") {
         $id = (int) $this->params()->fromRoute('id', 0);
         if (!$id) {
             return $this->redirect()->toRoute('product', array(
@@ -63,8 +73,6 @@ class ProductController extends AbstractActionController
         if ($request->isPost()) {
             $form->setInputFilter($product->getInputFilter());
             $form->setData(array_merge($request->getPost()->toArray(), $request->getFiles()->toArray()));
-            var_dump($form->setData(array_merge($request->getPost()->toArray(), $request->getFiles()->toArray())));die;
-            //var_dump($form);die;
             if ($form->isValid()) {
             	$fileName = $form->getData()['image']['name'];
                 if (move_uploaded_file($form->getData()['image']['tmp_name'], getcwd() . '/public/img/' . $fileName)) {
@@ -83,9 +91,18 @@ class ProductController extends AbstractActionController
             'id' => $id,
             'form' => $form,
         );
+        } else {
+            
+            $view = new ViewModel(array(
+                'message' => 'GET OUT OF HERE!',
+            ));
+            $view->setTemplate('product/error/access');
+            return $view;
+        }
     }
     public function deleteAction()
     {
+        if ($this->zfcUserAuthentication()->hasIdentity() && $this->zfcUserAuthentication()->getIdentity()->getRole() == "admin") {
         $id = (int) $this->params()->fromRoute('id', 0);
         if (!$id) {
             return $this->redirect()->toRoute('product');
@@ -104,6 +121,14 @@ class ProductController extends AbstractActionController
             'id'    => $id,
             'product' => $this->getProductTable()->getProduct($id)
         );
+        } else {
+            
+            $view = new ViewModel(array(
+                'message' => 'GET OUT OF HERE',
+            ));
+            $view->setTemplate('product/error/access');
+            return $view;
+        }
     }
     public function getProductTable()
     {
@@ -113,26 +138,4 @@ class ProductController extends AbstractActionController
         }
         return $this->productTable;
     }
-    public function uploadFormAction()
-    {
-        $form = new UploadForm('upload-form');
-
-        $request = $this->getRequest();
-        if ($request->isPost()) {
-            // Make certain to merge the files info!
-            $post = array_merge_recursive(
-                $request->getPost()->toArray(),
-                $request->getFiles()->toArray()
-            );
-
-            $form->setData($post);
-            if ($form->isValid()) {
-                $data = $form->getData();
-                // Form is valid, save the form!
-                return $this->redirect()->toRoute('product');
-            }
-        }
-
-        return array('form' => $form);
-    }
-}
+    

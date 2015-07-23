@@ -106,32 +106,4 @@ class Product implements InputFilterAwareInterface
         }
         return $this->inputFilter;
     }
-    /*public function __invoke(User $user = null)
-    {
-        if (null === $user) {
-            if ($this->getAuthService()->hasIdentity()) {
-                $user = $this->getAuthService()->getIdentity();
-                if (!$user instanceof User) {
-                    throw new \ZfcUser\Exception\DomainException(
-                        '$user is not an instance of User',
-                        500
-                    );
-                }
-            } else {
-                return true;
-            }
-        }
-
-        $displayName = $user->getDisplayName();
-        if (null === $displayName) {
-            $displayName = $user->getUsername();
-        }
-        // User will always have an email, so we do not have to throw error
-        if (null === $displayName) {
-            $displayName = $user->getEmail();
-            $displayName = substr($displayName, 0, strpos($displayName, '@'));
-        }
-
-        return $displayName;
-    }*/
 }

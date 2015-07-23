@@ -12,7 +12,6 @@ class ProductForm extends Form
         parent::__construct('product');
         $this->setAttribute('method', 'post');
         $this->setAttribute('enctype', 'multipart/form-data');
-        //$this->setAttribute('onsubmit', 'return SendFile()' );
         $this->add(array(
             'name' => 'id',
             'attributes' => array(
@@ -58,8 +57,6 @@ class ProductForm extends Form
         ));
         $this->add(array(
             'name' => 'submit',
-            //'target' => './public/img/',
-            //'use_upload_name' => true,
             'attributes' => array(
                 'type'  => 'submit',
                 'value' => 'Go',
