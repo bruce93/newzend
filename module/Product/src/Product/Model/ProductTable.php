@@ -30,7 +30,7 @@ class ProductTable
             'product_name' => $product->product_name,
             'description'  => $product->description,
             'price' => $product->price,
-            'image'  => $product->image,
+            'image'  => $product->image['name'],
         );
         $id = (int)$product->id;
         if ($id == 0) {

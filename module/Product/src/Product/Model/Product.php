@@ -100,7 +100,7 @@ class Product implements InputFilterAwareInterface
             )));
             $inputFilter->add($factory->createInput(array(
                 'name'     => 'image',
-                'required' => true,
+                //'required' => true,
             )));
             $this->inputFilter = $inputFilter;
         }

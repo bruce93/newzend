@@ -10,6 +10,7 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\Input;
 use Zend\InputFilter\FileInput;
 use Zend\Validator;
+use Zend\Validator\File\Size;
 
 class ProductController extends AbstractActionController
 {
@@ -29,37 +30,20 @@ class ProductController extends AbstractActionController
         if ($request->isPost()) {   
             $product = new Product();
             $form->setInputFilter($product->getInputFilter());
-            $form->setData($request->getPost());
+            $form->setData(array_merge($request->getPost()->toArray(), $request->getFiles()->toArray()));
+
             if ($form->isValid()) {
-                $adapter = new \Zend\File\Transfer\Adapter\Http();
-                if (!$adapter->isValid()){
-                    $dataError = $adapter->getMessages();
-                    foreach($dataError as $key => $row)
-                    {
-                        $errorMessage[] = $row;
-                    } 
-                    //print_r($row);
-                   // return false;
-                } else { 
-                    $data = $form->getData();
-                    $fileName = $data['image'];
-                    //$dir = getcwd() . '/public/img/';
-                    $dir = 'var/www/newzend/public/img/';
-                    $fileTlsName = $dir.$fileName;// \gid\uid\fileName
-                    $adapter->addFilter('Rename', $fileTlsName);// rename file
-                       if ($adapter->receive($fileName)) {// upload file
-                            return true;
-                        }
-                }
-                //return false;
+                $fileName = $form->getData()['image']['name'];
+                if (move_uploaded_file($form->getData()['image']['tmp_name'], getcwd() . '/public/img/' . $fileName)) {
+				    echo "Файл корректен и был успешно загружен.\n";
+				} else {
+				    echo "Возможная атака с помощью файловой загрузки!\n";
+				}
+
                 $product->exchangeArray($form->getData());
-                //var_dump($product); die;
-                //$product->receive();
                 $this->getProductTable()->saveProduct($product); 
                 // Redirect to list of products
                 return $this->redirect()->toRoute('product');
-            } else {//написать сообщения и вывести во view
-                echo 'error';
             }
         }
         return array('form' => $form);
@@ -79,8 +63,17 @@ class ProductController extends AbstractActionController
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setInputFilter($product->getInputFilter());
-            $form->setData($request->getPost());
+            $form->setData(array_merge($request->getPost()->toArray(), $request->getFiles()->toArray()));
             if ($form->isValid()) {
+				$fileName = $form->getData()['image']['name'];
+				var_dump($fileName = $form->getData()['image']['name']); die;
+                if (move_uploaded_file($form->getData()['image']['tmp_name'], getcwd() . '/public/img/' . $fileName)) {
+				    echo "Файл корректен и был успешно загружен.\n";
+				} else {
+				    echo "Возможная атака с помощью файловой загрузки!\n";
+				}
+
+            	$product->exchangeArray($form->getData());
                 $this->getProductTable()->saveProduct($form->getData());
                 // Redirect to list of products
                 return $this->redirect()->toRoute('product');

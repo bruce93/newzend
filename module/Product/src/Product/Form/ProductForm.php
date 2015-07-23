@@ -11,8 +11,8 @@ class ProductForm extends Form
         // we want to ignore the name passed
         parent::__construct('product');
         $this->setAttribute('method', 'post');
-        //$this->setAttribute('enctype', 'multipart/form-data');
-        $this->setAttribute('onsubmit', 'return SendFile()' );
+        $this->setAttribute('enctype', 'multipart/form-data');
+        //$this->setAttribute('onsubmit', 'return SendFile()' );
         $this->add(array(
             'name' => 'id',
             'attributes' => array(
@@ -51,7 +51,6 @@ class ProductForm extends Form
             'attributes' => array(
                 'type'  => 'file',
                 'id' => 'photo',
-                //'multiple' => 'true',
             ),
             'options' => array(
                 'label' => '_Изображение ',
