@@ -26,7 +26,7 @@ class Product implements InputFilterAwareInterface
      // Add the following method:
     public function getArrayCopy()
     {
-        return get_object_vars($this);
+        return get_object_vars($this);//возвр св-ва указаного об-та.
     }
     public function setInputFilter(InputFilterInterface $inputFilter)
     {

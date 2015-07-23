@@ -31,7 +31,6 @@ class ProductController extends AbstractActionController
                 $product = new Product();
                 $form->setInputFilter($product->getInputFilter());
                 $form->setData(array_merge($request->getPost()->toArray(), $request->getFiles()->toArray()));
-
                 if ($form->isValid()) {
                     $fileName = $form->getData()['image']['name'];
                     if (move_uploaded_file($form->getData()['image']['tmp_name'], getcwd() . '/public/img/' . $fileName)) {
