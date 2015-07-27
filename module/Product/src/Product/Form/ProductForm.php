@@ -22,27 +22,25 @@ class ProductForm extends Form
             'name' => 'product_name',
             'attributes' => array(
                 'type'  => 'text',
+                'style' => 'margin-left:2px; margin-top: 2px; margin-bottom: 2px',
+                'size' => '19px',
             ),
             'options' => array(
                 'label' => 'Название ',
             ),
         ));
-        $this->add(array(
-            'name' => 'description',
-            'attributes' => array(
-                'type'  => 'text',
-            ),
-            'options' => array(
-                'label' => '_Описание ',
-            ),
-        ));
+        $textarea = new Element\Textarea('description');
+        $textarea->setLabel('Описание ');
+        $this->add($textarea);
         $this->add(array(
             'name' => 'price',
             'attributes' => array(
                 'type'  => 'text',
+                'style' => 'margin-left:35px; margin-top: 2px; margin-bottom: 2px',
+                'size' => '19px',
             ),
             'options' => array(
-                'label' => '_Цена ',
+                'label' => 'Цена ',
             ),
         ));
         $this->add(array(
@@ -51,7 +49,7 @@ class ProductForm extends Form
                 'type'  => 'file',
             ),
             'options' => array(
-                'label' => '_Изображение ',
+                'label' => 'Изображение ',
             ),
         ));
         $this->add(array(
@@ -60,7 +58,9 @@ class ProductForm extends Form
                 'type'  => 'submit',
                 'value' => 'Go',
                 'id' => 'submitbutton',
+                'style' => 'margin-top: 2px'
             ),
         ));
     }
 }
+

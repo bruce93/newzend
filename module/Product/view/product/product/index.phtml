@@ -11,7 +11,6 @@ if($this->zfcUserIdentity()) { ?>
 <?php } ?>
 <?php
 // module/Product/view/product/product/index.phtml:
-
 $title = 'My products';
 $this->headTitle($title);
 ?>
@@ -21,7 +20,7 @@ $this->headTitle($title);
 	    <a href="<?php echo $this->url('product', array('action'=>'add'));?>">Add new product</a>
 	</p>
 <?php } ?>
-
+<?php if ($products->count() != 0) { ?>
 <table class="table">
 <tr>
     <th>Название товара</th>
@@ -30,20 +29,27 @@ $this->headTitle($title);
     <th>Изображение</th>
     <th>&nbsp;</th>
 </tr>
+
+<?php //var_dump($this->escapeHtml($products->product_name)); ?>
 <?php foreach ($products as $product) : ?>
 <tr>
     <td><?php echo $this->escapeHtml($product->product_name);?></td>
+
     <td><?php echo $this->escapeHtml($product->description);?></td>
     <td><?php echo $this->escapeHtml($product->price);?></td>
     <td><?php echo "<img src='/img/" . $this->escapeHtml($product->image) . "'/>";?></td>
     <td>
         <?php if ($this->zfcUserIdentity()) { ?> 
-	        <a href="<?php echo $this->url('product',
-	            array('action'=>'edit', 'id' => $product->id));?>">Edit</a>
-	        <a href="<?php echo $this->url('product',
-	            array('action'=>'delete', 'id' => $product->id));?>">Delete</a>
+            <a href="<?php echo $this->url('product',
+                array('action'=>'edit', 'id' => $product->id));?>">Edit</a>
+            <a href="<?php echo $this->url('product',
+                array('action'=>'delete', 'id' => $product->id));?>">Delete</a>
         <?php } ?>
     </td>
 </tr>
 <?php endforeach; ?>
 </table>
+<?php } else { ?>
+    <h1>Записей нет.</h1>   
+<?php }  ?>
+

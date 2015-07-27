@@ -8,8 +8,14 @@ $this->headTitle($title);
 $form = $this->form;
 $form->setAttribute('action', $this->url('product', array('action' => 'add')));
 $form->prepare();
-echo $this->form()->openTag($form);
-echo $this->formCollection($form);
-echo $this->form()->closeTag();
+echo $this->form()->openTag($form);?>
+<!--//echo $this->formCollection($form);-->
+<?php echo $this->formRow($form->get('id'));
+echo $this->formRow($form->get('product_name'));?><br />
+<?php echo $this->formRow($form->get('description'));?><br />
+<?php echo $this->formRow($form->get('price'));?><br />
+<?php echo $this->formRow($form->get('image'));?><br />
+<?php echo $this->formRow($form->get('submit'));
+echo $this->form()->closeTag();?>
 
 
